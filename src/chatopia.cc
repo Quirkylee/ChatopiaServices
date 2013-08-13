@@ -21,7 +21,7 @@
 
 #include <iostream>;
 
-#include "chatopia.h";
+#include "chatopia.hh";
 
 
 using namespace std;
