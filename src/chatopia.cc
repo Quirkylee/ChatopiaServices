@@ -18,17 +18,21 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-
-#include <iostream>;
-
 #include "chatopia.hh";
 
 
 using namespace std;
+Chatopia* ServerInstance = NULL;
+void Chatopia::Run() {
 
-int main ()
-{
-  cout << "Chatopia IRC Services" << endl;
+}
+ENTRYPOINT {
+	//TODO: fix this error
+	new Chatopia(argc, argv);
+	ServerInstance->Run();
+  cout << "\x1b[1mChatopia IRC Services\x1b[0m" << endl << endl;
+
+  delete ServerInstance;
   return 0;
 }
 

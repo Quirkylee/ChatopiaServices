@@ -22,7 +22,26 @@
 #ifndef CHATOPIA_H_
 #define CHATOPIA_H_
 
+#include <iostream>;
 
+#ifdef _WIN32|| _WIN64
+   #define ENTRYPOINT int smain(int argc, char argv[])
+#elif __APPLE__ || __linux || __unix || __posix
+    #define ENTRYPOINT int main(int argc, char argv[])
+#endif
+class Chatopia {
+	public:
+		/**
+		 * The constructor initializes sub
+		 * @param argc The argument count passed to main()
+         * @param argv The argument list passed to main()
+		 */
+		Chatopia(int argc, char** argv);
 
-
+		/**
+		 * Starts server
+		 */
+		void Run();
+};
+ENTRYPOINT;
 #endif /* CHATOPIA_H_ */

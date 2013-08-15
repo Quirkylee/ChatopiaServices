@@ -1,4 +1,4 @@
-all: clean src/chatopia.o
+all: src/chatopia.o
 	g++ -o chatopia src/chatopia.o
 
 src/chatopia.o:
