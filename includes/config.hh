@@ -1,7 +1,7 @@
 /*
- * chatopia.cpp
+ * config.hh
  *
- *  Created on: Aug 13, 2013
+ *  Created on: Aug 16, 2013
  *      Author: matthewl
  *
  * Copyright 2013 Matthew Lindsey (chatopia.net)
@@ -18,36 +18,26 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-#include "chatopia.hh";
+
+#ifndef CONFIG_HH_
+#define CONFIG_HH_
 
 
-using namespace std;
-Chatopia* ServerInstance = NULL;
-void Chatopia::Run() {
+class ServiceConfig {
+private:
 
-}
-Chatopia::Chatopia(int argc, char** argv) {
-	this->Config = new ServiceConfig();
+public:
+	struct CmdLineConf {
+				/**
+				 * argc from startup
+				 */
+				int argc;
+				/**
+				 * argv from startup
+				 */
+				char** argv;
+			};
+	CmdLineConf* cmdline;
+};
 
-	/**
-	 * Pass argc off for later use.
-	 */
-	this->Config->cmdline->argc = argc;
-
-	/**
-	 * Pass argv off for later use.
-	 */
-	this->Config->cmdline->argv = argv;
-
-}
-ENTRYPOINT {
-	//TODO: fix this error
-	new Chatopia(argc, argv);
-	ServerInstance->Run();
-  cout << "\x1b[1mChatopia IRC Services\x1b[0m" << endl << endl;
-
-  delete ServerInstance;
-  return 0;
-}
-
-
+#endif /* CONFIG_HH_ */

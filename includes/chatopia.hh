@@ -24,10 +24,12 @@
 
 #include <iostream>;
 
+#include "config.hh";
+
 #ifdef _WIN32|| _WIN64
-   #define ENTRYPOINT int smain(int argc, char argv[])
+   #define ENTRYPOINT int smain(int argc, char** argv)
 #elif __APPLE__ || __linux || __unix || __posix
-    #define ENTRYPOINT int main(int argc, char argv[])
+    #define ENTRYPOINT int main(int argc, char** argv)
 #endif
 class Chatopia {
 	public:
@@ -37,6 +39,11 @@ class Chatopia {
          * @param argv The argument list passed to main()
 		 */
 		Chatopia(int argc, char** argv);
+
+		/**
+		 * Holds Service Configuration Data
+		 */
+		ServiceConfig* Config;
 
 		/**
 		 * Starts server

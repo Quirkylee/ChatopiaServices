@@ -1,7 +1,7 @@
 /*
- * chatopia.cpp
+ * serviceconf.cc
  *
- *  Created on: Aug 13, 2013
+ *  Created on: Aug 16, 2013
  *      Author: matthewl
  *
  * Copyright 2013 Matthew Lindsey (chatopia.net)
@@ -18,36 +18,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-#include "chatopia.hh";
 
 
-using namespace std;
-Chatopia* ServerInstance = NULL;
-void Chatopia::Run() {
-
-}
-Chatopia::Chatopia(int argc, char** argv) {
-	this->Config = new ServiceConfig();
-
-	/**
-	 * Pass argc off for later use.
-	 */
-	this->Config->cmdline->argc = argc;
-
-	/**
-	 * Pass argv off for later use.
-	 */
-	this->Config->cmdline->argv = argv;
-
-}
-ENTRYPOINT {
-	//TODO: fix this error
-	new Chatopia(argc, argv);
-	ServerInstance->Run();
-  cout << "\x1b[1mChatopia IRC Services\x1b[0m" << endl << endl;
-
-  delete ServerInstance;
-  return 0;
-}
 
 
