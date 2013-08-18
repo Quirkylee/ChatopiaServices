@@ -22,22 +22,28 @@
 #ifndef CONFIG_HH_
 #define CONFIG_HH_
 
+struct CmdLineConf {
+		/**
+		 * argc from startup
+		 */
+		int argc;
 
+		/**
+		 * argv from startup
+		 */
+		char** argv;
+
+		/**
+		 * if --nofork at commandline is specified the deamon won't fork to background.
+		 */
+		bool nofork;
+	};
 class ServiceConfig {
-private:
-
 public:
-	struct CmdLineConf {
-				/**
-				 * argc from startup
-				 */
-				int argc;
-				/**
-				 * argv from startup
-				 */
-				char** argv;
-			};
-	CmdLineConf* cmdline;
+	CmdLineConf cmdline;
+	void Read();
+
 };
+
 
 #endif /* CONFIG_HH_ */

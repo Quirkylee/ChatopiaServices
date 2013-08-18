@@ -18,6 +18,8 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
+#include <fstream>;
+#include <iostream>;
 #include "chatopia.hh";
 
 
@@ -27,27 +29,43 @@ void Chatopia::Run() {
 
 }
 Chatopia::Chatopia(int argc, char** argv) {
-	this->Config = new ServiceConfig();
+	/**
+	 * Initialize stuff so we do not lose them later
+	 */
+	this->Config = 0;
+	ServerInstance = this;
+	int do_nofork = 0;
+
+	this->Config = new ServiceConfig;
+	/**
+	 * Pass argv off for later use.
+	 */
+	this->Config->cmdline.argv = argv;
 
 	/**
 	 * Pass argc off for later use.
 	 */
-	this->Config->cmdline->argc = argc;
+	this->Config->cmdline.argc = argc;
 
 	/**
-	 * Pass argv off for later use.
+	 * parse command and set longopts
 	 */
-	this->Config->cmdline->argv = argv;
+	struct option longopts[] =
+	{
+			{ "nofork",	no_argument,		&do_nofork,	1	},
+			{ 0, 0, 0, 0 }
+	};
+	while((c = getopt_long(argc, argv, ":c:", longopts, &index)) != -1) {
+
+	}
 
 }
-ENTRYPOINT {
+int main(int argc, char** argv) {
 	//TODO: fix this error
 	new Chatopia(argc, argv);
 	ServerInstance->Run();
-  cout << "\x1b[1mChatopia IRC Services\x1b[0m" << endl << endl;
+	cout << "\x1b[1mChatopia IRC Services\x1b[0m" << endl << endl;
 
   delete ServerInstance;
   return 0;
 }
-
-
