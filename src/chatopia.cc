@@ -20,6 +20,7 @@
  */
 #include <fstream>;
 #include <iostream>;
+#include <getopt.h>
 #include "chatopia.hh";
 
 
@@ -34,7 +35,8 @@ Chatopia::Chatopia(int argc, char** argv) {
 	 */
 	this->Config = 0;
 	ServerInstance = this;
-	int do_nofork = 0;
+	int do_nofork, do_version = 0;
+
 
 	this->Config = new ServiceConfig;
 	/**
@@ -53,18 +55,43 @@ Chatopia::Chatopia(int argc, char** argv) {
 	struct option longopts[] =
 	{
 			{ "nofork",	no_argument,		&do_nofork,	1	},
+			{ "version",	no_argument,		&do_version,	1	},
 			{ 0, 0, 0, 0 }
 	};
+	int c;
+	int index;
 	while((c = getopt_long(argc, argv, ":c:", longopts, &index)) != -1) {
-
+		switch (c)
+	{
+	case 0:
+	/* just keep going */
+	break;
+	case '?':
+	/* Unknown parameter */
+	default:
+	/* Fall through to handle other weird values too */
+	cout << "Unknown parameter '" << argv[optind-1] << "'" << endl;
+	cout << "Usage: " << argv[0] << " [--nofork] [--version]" << endl;
+	exit(0);
+	break;
+	}
 	}
 
+	/* prints version if specified on command line */
+	if(do_version != 0) {
+		cout << endl << VERSION << endl;
+		exit(0);
+	}
+
+	/* set command line argument values */
+	Config->cmdline.nofork = (do_nofork != 0);
+	cout << "\x1b[1mChatopia IRC Services\x1b[0m" << endl << endl;
+
 }
+
 int main(int argc, char** argv) {
-	//TODO: fix this error
 	new Chatopia(argc, argv);
 	ServerInstance->Run();
-	cout << "\x1b[1mChatopia IRC Services\x1b[0m" << endl << endl;
 
   delete ServerInstance;
   return 0;

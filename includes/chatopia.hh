@@ -24,8 +24,8 @@
 
 #include <fstream>;
 #include <iostream>;
-
 #include "config.hh";
+#include "servconfig.hh";
 
 class Chatopia {
 public:
@@ -40,7 +40,6 @@ public:
 	 * Holds Service Configuration Data
 	 */
 	ServiceConfig* Config;
-
 	/**
 	 * Starts server
 	*/

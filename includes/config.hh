@@ -1,7 +1,7 @@
 /*
  * config.hh
  *
- *  Created on: Aug 16, 2013
+ *  Created on: Aug 21, 2013
  *      Author: matthewl
  *
  * Copyright 2013 Matthew Lindsey (chatopia.net)
@@ -18,32 +18,13 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-
+/*
+ * TEMP CONFIG.HH! TO BE DELETED AFTER I CREATE ./configure
+ */
 #ifndef CONFIG_HH_
 #define CONFIG_HH_
 
-struct CmdLineConf {
-		/**
-		 * argc from startup
-		 */
-		int argc;
-
-		/**
-		 * argv from startup
-		 */
-		char** argv;
-
-		/**
-		 * if --nofork at commandline is specified the deamon won't fork to background.
-		 */
-		bool nofork;
-	};
-class ServiceConfig {
-public:
-	CmdLineConf cmdline;
-	void Read();
-
-};
+#define 	VERSION		"Chatopia IRC Services 0.5"
 
 
 #endif /* CONFIG_HH_ */
