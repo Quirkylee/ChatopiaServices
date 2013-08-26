@@ -1,7 +1,7 @@
 /*
- * config.hh
+ * logger.cc
  *
- *  Created on: Aug 21, 2013
+ *  Created on: Aug 25, 2013
  *      Author: matthewl
  *
  * Copyright 2013 Matthew Lindsey (chatopia.net)
@@ -18,14 +18,20 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-/*
- * TEMP CONFIG.HH! TO BE DELETED AFTER I CREATE ./configure
- */
-#ifndef CONFIG_HH_
-#define CONFIG_HH_
-
-#define 	VERSION		"Chatopia IRC Services 0.5"
-#define		CONFFILE	"conf/chatopia.conf"
 
 
-#endif /* CONFIG_HH_ */
+#include "chatopia.hh";
+
+void Logger::AddLogType(char* type, LogLvls lvl) {
+	if(LogType.find(type) == LogType.end()) {
+		LogType.insert(std::make_pair(type, lvl));
+	}
+}
+void Logger::AddLog(char* name, char* type, char* file, LogLvls* level, Colors* color) {
+	if(LogType.find(type) == LogType.end()) {
+		LogFile log = new LogFile(type, file, level, color);
+		Logs.insert(std::make_pair<char*,LogFile>(name,log));
+	} else {
+		//ServerInstance->Logs->Log("WARN", "The log type of \"" + type + "\" doesn't exist!");
+	}
+}

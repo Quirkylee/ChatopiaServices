@@ -20,6 +20,7 @@
  */
 #include "chatopia.hh";
 #include "servconfig.hh";
-void ServiceConfig::Read() {
+
+void ServiceConfig::ReadConf() {
 
 }

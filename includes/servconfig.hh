@@ -22,6 +22,8 @@
 #ifndef SERVCONFIG_HH_
 #define SERVCONFIG_HH_
 
+#include "chatopia.hh";
+
 struct CmdLineConf {
 		/**
 		 * argc from startup
@@ -41,9 +43,14 @@ struct CmdLineConf {
 class ServiceConfig {
 public:
 	CmdLineConf cmdline;
-	void Read();
+	void ReadConf();
 
 };
-
+class ConfigTags {
+public:
+	const std::string tag;
+	const std::string source_line;
+	const std::string source_name;
+};
 
 #endif /* SERVCONFIG_HH_ */

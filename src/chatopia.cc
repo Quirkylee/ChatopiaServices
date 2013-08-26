@@ -20,6 +20,7 @@
  */
 #include <fstream>;
 #include <iostream>;
+#include <utility>;
 #include <getopt.h>
 #include "chatopia.hh";
 
@@ -35,10 +36,11 @@ Chatopia::Chatopia(int argc, char** argv) {
 	 */
 	this->Config = 0;
 	ServerInstance = this;
-	int do_nofork, do_version = 0;
+	int do_nofork = 0, do_version = 0;
 
 
 	this->Config = new ServiceConfig;
+	this->Logs = new Logger;
 	/**
 	 * Pass argv off for later use.
 	 */
@@ -62,19 +64,19 @@ Chatopia::Chatopia(int argc, char** argv) {
 	int index;
 	while((c = getopt_long(argc, argv, ":c:", longopts, &index)) != -1) {
 		switch (c)
-	{
-	case 0:
-	/* just keep going */
-	break;
-	case '?':
-	/* Unknown parameter */
-	default:
-	/* Fall through to handle other weird values too */
-	cout << "Unknown parameter '" << argv[optind-1] << "'" << endl;
-	cout << "Usage: " << argv[0] << " [--nofork] [--version]" << endl;
-	exit(0);
-	break;
-	}
+		{
+		case 0:
+			/* just keep going */
+			break;
+		case '?':
+			/* Unknown parameter */
+		default:
+			/* Fall through to handle other weird values too */
+			cout << "Unknown parameter '" << argv[optind-1] << "'" << endl;
+			cout << "Usage: " << argv[0] << " [--nofork] [--version]" << endl;
+			exit(0);
+			break;
+		}
 	}
 
 	/* prints version if specified on command line */
@@ -85,7 +87,7 @@ Chatopia::Chatopia(int argc, char** argv) {
 
 	/* set command line argument values */
 	Config->cmdline.nofork = (do_nofork != 0);
-	cout << "\x1b[1mChatopia IRC Services\x1b[0m" << endl << endl;
+	cout << "\x1b[50m\x1b[33mChatopia IRC Services\x1b[0m" << endl << endl;
 
 }
 
