@@ -18,8 +18,11 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
+#ifndef LOGGER_HH_
+#define LOGGER_HH_
 #include <map>;
 
+#include "chatopia.hh";
 enum LogLvls {
 	LOG_RAWIO = 0,
 	LOG_DEBUG = 1,
@@ -44,26 +47,24 @@ enum Colors {
 	CYAN = 36,
 	WHITE = 37
 };
-typedef struct {
+struct LogType {
 	char* type;
 	int level;
-} LogType;
-typedef class {
+};
+class LogFile {
 public:
-	void LogFile(FILE* logfile, LogType type, LogLvls* level, Colors* color) {
-		this->log = logfile;
-		this->type = type;
-		this->level = level;
-		this->color = color;
-	}
-	FILE* log;
-	LogType type;
-	LogLvls* level;
+	LogFile(char* logfile, LogType* type, LogLvls level, Colors* color);
+
+	char* log;
+	LogType* type;
+	LogLvls level;
 	Colors* color;
-} LogFile;
-class Logger {
+};
+
+class Loger {
 public:
-	std::map<char*, LogFile> Logs;
+	std::map<char*, LogFile*> Logs;
+	std::map<char*, LogType*> Types;
 	/**
 	 * Adds a log type to LogType
 	 *
@@ -73,19 +74,29 @@ public:
 	void AddLogType(char* type, LogLvls lvl);
 
 	/**
-	 * deletes a log type
+	 * Deletes a log type
 	 *
 	 * @param type key index of the log to report on.
 	 * @param lvl Reporting level of the log type.
 	 */
 	 void DelLogType(char* type);
 
+	 /**
+	  * Adds a log to the logs to print to
+	  *
+	  * @param name Key name to target the log.
+	  * @param type Type of log in LogTypes.
+	  * @param file Filename of the log.
+	  * @param level Default log level to report at
+	  * @param color Color to show in the console.
+	  */
+	 void AddLog(char* name, LogType* type, char* file, LogLvls level, Colors* color);
 
-	/**
-	 * Adds a log
-	 *
-	 * @param type
-	 * @param file
-	 */
-	void AddLog(char* name, char* type, char* file, LogLvls* level, Colors* color);
+	 /**
+	  *  adds a line to Log
+	  * @param name Key name to target the log.
+	  * @param msg Message to add to log.
+	  */
+	 void Log(char* name, char* msg);
 };
+#endif /* LOGGER_HH */

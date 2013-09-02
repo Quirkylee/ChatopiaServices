@@ -21,6 +21,8 @@
 #include <fstream>;
 #include <iostream>;
 #include <utility>;
+#include <map>
+#include <new>
 #include <getopt.h>
 #include "chatopia.hh";
 
@@ -40,7 +42,7 @@ Chatopia::Chatopia(int argc, char** argv) {
 
 
 	this->Config = new ServiceConfig;
-	this->Logs = new Logger;
+	this->Logs = new Loger;
 	/**
 	 * Pass argv off for later use.
 	 */

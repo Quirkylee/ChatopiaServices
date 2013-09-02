@@ -106,12 +106,11 @@ public:
 	/**
 	 * Initialize the logger class
 	 */
-	Logger* Logs;
+	Loger* Logs;
 	/**
 	 * Starts server
 	*/
 	void Run();
 };
-
 
 #endif /* CHATOPIA_H_ */
